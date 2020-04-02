@@ -1,4 +1,4 @@
-class Heft < Formula
+class Datafy < Formula
   desc "Datafy command line interface"
   homepage "https://get.datafy.cloud/"
   url "https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/0.12.0/datafy_darwin_amd64.tar.gz"
