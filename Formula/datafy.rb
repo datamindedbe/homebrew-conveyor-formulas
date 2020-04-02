@@ -6,6 +6,6 @@ class Datafy < Formula
   sha256 "d1647e75702c51f0aa8800ab299b52ecee19265fdf80e2d1e538540b990a885d"
 
   def install
-    bin.install "godatafy"
+    bin.install "bin/darwin/amd64/datafy" => "godatafy"
   end
 end
