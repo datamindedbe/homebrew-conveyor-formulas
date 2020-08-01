@@ -3,7 +3,7 @@ class Datafy < Formula
   homepage "https://get.datafy.cloud/"
   url "https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/0.22.2/datafy_darwin_amd64.tar.gz"
   version "0.22.2"
-  sha256 "b85b56f72843d5a56b0f708fadf33c5529e338fb7a0d3432cf7ff556b084fc04"
+  sha256 "4de697f354fdbfc1635cc13e2b7e9ed0bd333fc9fc2cceb236c9b6225bc09a69"
 
   def install
     bin.install "darwin/amd64/datafy" => "datafy"
