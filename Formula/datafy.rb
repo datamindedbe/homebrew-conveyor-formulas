@@ -1,9 +1,9 @@
 class Datafy < Formula
   desc "Datafy command line interface"
   homepage "https://get.datafy.cloud/"
-  url "https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/0.39.0/datafy_darwin_amd64.tar.gz"
-  version "0.39.0"
-  sha256 "89d590e2128647435ef8a86525bc26bdfbea9ea3e57bad517392b0807a06192c"
+  url "https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/0.40.0/datafy_darwin_amd64.tar.gz"
+  version "0.40.0"
+  sha256 "c8fd2c7eea3c23d9445af6de827bc50a876d22893669142e70b7b37580391b96"
 
   def install
     bin.install "darwin/amd64/datafy" => "datafy"
