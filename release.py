@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-import os, re, subprocess, hashlib
+import os, re, subprocess, hashlib, sys
 from pathlib import Path
 import urllib.request as ur
 
+noninteractive = "--noninteractive" in sys.argv
 datafy_cmd="datafy"
 latest_version_url="https://app.datafy.cloud/api/info/cli/version"
 version_to_release_urls = lambda version: {
@@ -30,6 +31,10 @@ for key in release_urls:
     sha256 "{shas[key]}"
   end"""
 
+if noninteractive or input("upgrade formula definition? y/N   ") != "y":
+  print("Exiting")
+  exit()
+
 formula=f"""class Datafy < Formula
   desc "Datafy command line interface"
   homepage "https://get.datafy.cloud/"
@@ -50,4 +55,10 @@ formula=f"""class Datafy < Formula
   end
 end"""
 formula_path.write_text(formula)
-subprocess.run(f"git add . && git commit -m 'upgrade to v{latest_version}' && git push")
+
+if noninteractive or input("commit to repo and push? y/N   ") != "y":
+  print("Exiting")
+  exit()
+
+print("Committing new version to repo and pushing")
+subprocess.run(f"git add . && git commit -m 'upgrade to v{latest_version}' && git push", shell=True)
