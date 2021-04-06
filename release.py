@@ -3,7 +3,11 @@ import os, re, subprocess, hashlib, sys
 from pathlib import Path
 import urllib.request as ur
 
+# If the --noninteractive flag is set, the script will not prompt for user input
 noninteractive = "--noninteractive" in sys.argv
+# If the --noninteractive flag is set, the script pushes the resulting formula to the repo iff the --push flag is also set
+noninteractive_push = "--push" in sys.argv
+
 datafy_cmd="datafy"
 latest_version_url="https://app.datafy.cloud/api/info/cli/version"
 version_to_release_urls = lambda version: {
@@ -24,17 +28,17 @@ release_urls = version_to_release_urls(latest_version)
 print(f"Downloading releases from {release_urls}")
 shas = {platform: hashlib.sha256(ur.urlopen(url).read()).hexdigest() for platform, url in release_urls.items()}
 print(f"Release hashes: {shas}")
+
+if noninteractive or input("upgrade formula definition? y/N   ") != "y":
+  print("Exiting")
+  exit()
+
 blocks = {}
 for key in release_urls:
   blocks[key] = f"""on_{key} do
     url "{release_urls[key]}"
     sha256 "{shas[key]}"
   end"""
-
-if noninteractive or input("upgrade formula definition? y/N   ") != "y":
-  print("Exiting")
-  exit()
-
 formula=f"""class Datafy < Formula
   desc "Datafy command line interface"
   homepage "https://get.datafy.cloud/"
@@ -56,7 +60,7 @@ formula=f"""class Datafy < Formula
 end"""
 formula_path.write_text(formula)
 
-if noninteractive or input("commit to repo and push? y/N   ") != "y":
+if (noninteractive and noninteractive_push) or input("commit to repo and push? y/N   ") != "y":
   print("Exiting")
   exit()
 
