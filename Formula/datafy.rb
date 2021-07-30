@@ -21,5 +21,9 @@ class Datafy < Formula
     # Install zsh completion
     output = Utils.safe_popen_read("#{bin}/datafy", "completion", "zsh", { :err => :out })
     (zsh_completion/"_datafy").write output
+
+    # Install fish completion
+    output = Utils.safe_popen_read("#{bin}/datafy", "completion", "fish", { :err => :out })
+    (fish_completion/"datafy.fish").write output
   end
 end
