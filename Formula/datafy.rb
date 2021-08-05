@@ -25,4 +25,5 @@ class Datafy < Formula
     # Install fish completion
     output = Utils.safe_popen_read("#{bin}/datafy", "completion", "fish", { :err => :out })
     (fish_completion/"datafy.fish").write output
+  end
 end

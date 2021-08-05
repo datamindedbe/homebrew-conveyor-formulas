@@ -50,18 +50,19 @@ formula=f"""class Datafy < Formula
     bin.install Dir.glob("**/datafy")
 
     # Install bash completion
-    output = Utils.safe_popen_read("#{bin}/datafy", "completion", "bash", { :err => :out })
+    output = Utils.safe_popen_read("#{{bin}}/datafy", "completion", "bash", {{ :err => :out }})
     (bash_completion/"datafy").write output
 
     # Install zsh completion
-    output = Utils.safe_popen_read("#{bin}/datafy", "completion", "zsh", { :err => :out })
+    output = Utils.safe_popen_read("#{{bin}}/datafy", "completion", "zsh", {{ :err => :out }})
     (zsh_completion/"_datafy").write output
 
     # Install fish completion
-    output = Utils.safe_popen_read("#{bin}/datafy", "completion", "fish", { :err => :out })
+    output = Utils.safe_popen_read("#{{bin}}/datafy", "completion", "fish", {{ :err => :out }})
     (fish_completion/"datafy.fish").write output
   end
-end"""
+end
+"""
 formula_path.write_text(formula)
 
 if (noninteractive and noninteractive_push) or input("commit to repo and push? y/N   ") != "y":
