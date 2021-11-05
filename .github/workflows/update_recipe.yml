@@ -1,0 +1,54 @@
+name: Check homebrew recipe and modify versions if necessary
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  push:
+    branches:
+      - master
+
+jobs:
+  checkupdate:
+    runs-on: ubuntu-latest
+    env:
+      RECIPE: Formula/datafy.rb
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.REPO_TOKEN }}
+
+    - name: Check latest version
+      id: latest-version
+      run: |
+        echo ::set-output name=latest::$(curl -s https://app.datafy.cloud/api/info/cli/version)
+
+    - name: Check current version
+      id: current-version
+      run: |
+        echo ::set-output name=current::$(grep "version \".*\"" $RECIPE | grep -o "[0-9]*\.[0-9]*.[0-9]*")
+
+    - name: Modify recipe if they are different
+      if: steps.latest-version.latest != steps.current-version.current
+      run: |
+        version=${${{ steps.latest-version.latest }}}
+        old_version=${${{ steps.current-version.current }}}
+        pathmac=datafy_mac.tar.gz
+        pathlinux=datafy_linux.tar.gz
+        curl -sL https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/${version}/datafy_darwin_amd64.tar.gz -o $pathmac
+        curl -sL https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/${version}/datafy_linux_amd64.tar.gz -o $pathlinux
+        sma=($(sha256sum $pathmac))
+        sma=${sma[0]}
+        sli=($(sha256sum $pathlinux))
+        sli=${sli[0]}
+        shas=($sma $sli)
+        sed -i "s:${old_version}:${version}:g" $RECIPE
+        index=$((0))
+        grep "sha256" $RECIPE | grep -o "\"[0-9a-f]\+\"" | while read -r line; do sed -i "s:${line}:\"${shas[$index]}\":g" $RECIPE && index=$((index+1)) ; done
+        rm $pathmac
+        rm $pathlinux
+
+    - name: Trigger a pull request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: Updated from version ${{ steps.current-version.current }} to ${{ steps.latest-version.latest }}
