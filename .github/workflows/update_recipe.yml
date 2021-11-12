@@ -38,8 +38,8 @@ jobs:
     - name: Modify recipe if they are different
       if: steps.same.outputs.version == 'false'
       run: |
-        version=${${{ steps.latest.outputs.version }}}
-        old_version=${${{ steps.current.outputs.version }}}
+        version=${{ steps.latest.outputs.version }}
+        old_version=${{ steps.current.outputs.version }}
         pathmac=datafy_mac.tar.gz
         pathlinux=datafy_linux.tar.gz
         curl -sL https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/${version}/datafy_darwin_amd64.tar.gz -o $pathmac
