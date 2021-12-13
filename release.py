@@ -12,7 +12,7 @@ datafy_cmd="datafy"
 latest_version_url="https://app.datafy.cloud/api/info/cli/version"
 version_to_release_urls = lambda version: {
     "macos_intel": f"https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/{version}/datafy_darwin_amd64.tar.gz",
-    # "macos_arm": f"https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/{version}/datafy_darwin_arm64.tar.gz",
+    "macos_arm": f"https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/{version}/datafy_darwin_arm64.tar.gz",
     "linux_intel": f"https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/{version}/datafy_linux_amd64.tar.gz",
 }
 formula_path = Path(os.path.realpath(__file__)).parent.joinpath("Formula", "datafy.rb")
