@@ -1,4 +1,4 @@
-name: Check homebrew recipe and modify versions if necessary
+name: Check homebrew recipe and modify versions
 
 on:
   schedule:
