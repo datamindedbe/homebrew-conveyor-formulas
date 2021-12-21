@@ -38,22 +38,7 @@ jobs:
     - name: Modify recipe if they are different
       if: steps.same.outputs.version == 'false'
       run: |
-        version=${{ steps.latest.outputs.version }}
-        old_version=${{ steps.current.outputs.version }}
-        pathmac=datafy_mac.tar.gz
-        pathlinux=datafy_linux.tar.gz
-        curl -sL https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/${version}/datafy_darwin_amd64.tar.gz -o $pathmac
-        curl -sL https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/${version}/datafy_linux_amd64.tar.gz -o $pathlinux
-        sma=($(sha256sum $pathmac))
-        sma=${sma[0]}
-        sli=($(sha256sum $pathlinux))
-        sli=${sli[0]}
-        shas=($sma $sli)
-        sed -i "s:${old_version}:${version}:g" $RECIPE
-        index=$((0))
-        grep "sha256" $RECIPE | grep -o "\"[0-9a-f]\+\"" | while read -r line; do sed -i "s:${line}:\"${shas[$index]}\":g" $RECIPE && index=$((index+1)) ; done
-        rm $pathmac
-        rm $pathlinux
+        python3 release.py --noninteractive
 
     - name: Trigger a pull request
       uses: peter-evans/create-pull-request@v3
