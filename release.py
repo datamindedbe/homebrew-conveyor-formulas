@@ -31,19 +31,22 @@ print(f"Downloading releases from {release_urls}")
 shas = {platform: hashlib.sha256(ur.urlopen(url).read()).hexdigest() for platform, url in release_urls.items()}
 print(f"Release hashes: {shas}")
 
-if noninteractive or input("upgrade formula definition? y/N   ") != "y":
-  print("Exiting")
-  exit()
+if not noninteractive:
+    if input("upgrade formula definition? y/N   ") != "y":
+        print("Exiting")
+        exit()
 
 with open(template_path, 'r') as template:
   new_formula = template.read().replace('<version>', latest_version)
   for platform in release_urls.keys():
     new_formula = new_formula.replace(f'<{platform}_sha256>', shas[platform])
   formula_path.write_text(new_formula)
+print("Updated forumula")
 
-if (noninteractive and noninteractive_push) or input("commit to repo and push? y/N   ") != "y":
-  print("Exiting")
-  exit()
+if not noninteractive_push:
+    if noninteractive or input("commit to repo and push? y/N   ") != "y":
+        print("Exiting")
+        exit()
 
 print("Committing new version to repo and pushing")
 subprocess.run(f"git add . && git commit -m 'upgrade to v{latest_version}' && git push", shell=True)
