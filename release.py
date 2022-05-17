@@ -8,15 +8,15 @@ noninteractive = "--noninteractive" in sys.argv
 # If the --noninteractive flag is set, the script pushes the resulting formula to the repo iff the --push flag is also set
 noninteractive_push = "--push" in sys.argv
 
-datafy_cmd="datafy"
-latest_version_url="https://app.datafy.cloud/api/info/cli/version"
+conveyor_cmd="conveyor"
+latest_version_url="https://app.conveyorapp.com/api/info/cli/version"
 version_to_release_urls = lambda version: {
-    "macos_intel": f"https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/{version}/datafy_darwin_amd64.tar.gz",
-    "macos_arm": f"https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/{version}/datafy_darwin_arm64.tar.gz",
-    "linux_intel": f"https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/{version}/datafy_linux_amd64.tar.gz",
+    "macos_intel": f"https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/{version}/conveyor_darwin_amd64.tar.gz",
+    "macos_arm": f"https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/{version}/conveyor_darwin_arm64.tar.gz",
+    "linux_intel": f"https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/{version}/conveyor_linux_amd64.tar.gz",
 }
-formula_path = Path(os.path.realpath(__file__)).parent.joinpath("Formula", "datafy.rb")
-template_path = Path(os.path.realpath(__file__)).parent.joinpath("Formula", "datafy.template")
+formula_path = Path(os.path.realpath(__file__)).parent.joinpath("Formula", "conveyor.rb")
+template_path = Path(os.path.realpath(__file__)).parent.joinpath("Formula", "conveyor.template")
 released_version=re.search("version\s+\"([\d\.]+)", formula_path.read_text())[1]
 latest_version=ur.urlopen(latest_version_url).read().decode('utf-8')
 
