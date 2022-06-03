@@ -2,7 +2,7 @@ name: Check homebrew recipe and modify versions
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 */12 * * *"
   push:
     paths:
       - '.github/workflows/update_recipe.yml'
