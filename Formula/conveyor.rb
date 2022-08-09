@@ -2,18 +2,18 @@ class Conveyor < Formula
   desc "Conveyor command line interface"
   homepage "https://www.conveyordata.com/"
   if OS.mac? && Hardware::CPU.intel?
-    url "https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/1.4.0/conveyor_darwin_amd64.tar.gz"
-    sha256 "1a6952f14e2e082e02865f823a4796b043e63f72597327be1314ba221610020b"
+    url "https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/1.4.1/conveyor_darwin_amd64.tar.gz"
+    sha256 "b76d53511fffe88aa95b2d1d782e5226992bd35415a6aec12ea2ee0dbc99bc90"
   end
   if OS.mac? && Hardware::CPU.arm?
-    url "https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/1.4.0/conveyor_darwin_arm64.tar.gz"
-    sha256 "e19c4b31908ac093b8680c515cf0a34261da44f7c70886269218d6a3294e3705"
+    url "https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/1.4.1/conveyor_darwin_arm64.tar.gz"
+    sha256 "4040cf790e78f323e3b4474dfbdce82f80cb7e126b31add75bb6eab539777c5b"
   end
   if OS.linux? && Hardware::CPU.intel?
-    url "https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/1.4.0/conveyor_linux_amd64.tar.gz"
-    sha256 "6e7fd94f1877915bb0a4df0fed3ea33825cae0cc140d54678974c20df8132c07"
+    url "https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/1.4.1/conveyor_linux_amd64.tar.gz"
+    sha256 "af195fd7145840fd83fc10e73d6292ceeee0683c106d6f29970924ca03e0c2cb"
   end
-  version "1.4.0"
+  version "1.4.1"
 
   def install
     bin.install Dir.glob("**/conveyor")
