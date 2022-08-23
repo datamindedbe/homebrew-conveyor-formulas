@@ -11,9 +11,9 @@ noninteractive_push = "--push" in sys.argv
 conveyor_cmd="conveyor"
 latest_version_url="https://app.conveyordata.com/api/info/cli/version"
 version_to_release_urls = lambda version: {
-    "macos_intel": f"https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/{version}/conveyor_darwin_amd64.tar.gz",
-    "macos_arm": f"https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/{version}/conveyor_darwin_arm64.tar.gz",
-    "linux_intel": f"https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/{version}/conveyor_linux_amd64.tar.gz",
+    "macos_intel": f"https://static.conveyordata.com/cli/{version}/conveyor_darwin_amd64.tar.gz",
+    "macos_arm": f"https://static.conveyordata.com/cli/{version}/conveyor_darwin_arm64.tar.gz",
+    "linux_intel": f"https://static.conveyordata.com/cli/{version}/conveyor_linux_amd64.tar.gz",
 }
 formula_path = Path(os.path.realpath(__file__)).parent.joinpath("Formula", "conveyor.rb")
 template_path = Path(os.path.realpath(__file__)).parent.joinpath("Formula", "conveyor.template")
