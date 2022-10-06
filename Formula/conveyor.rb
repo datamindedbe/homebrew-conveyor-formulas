@@ -2,15 +2,15 @@ class Conveyor < Formula
   desc "Conveyor command line interface"
   homepage "https://www.conveyordata.com/"
   if OS.mac? && Hardware::CPU.intel?
-    url "https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/1.5.3/conveyor_darwin_amd64.tar.gz"
+    url "https://static.conveyordata.com/cli/1.5.3/conveyor_darwin_amd64.tar.gz"
     sha256 "5d4001c737ea931f2b5b03ee58a86231f2eed7af1afe5627164e2f994171f8e2"
   end
   if OS.mac? && Hardware::CPU.arm?
-    url "https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/1.5.3/conveyor_darwin_arm64.tar.gz"
+    url "https://static.conveyordata.com/cli/1.5.3/conveyor_darwin_arm64.tar.gz"
     sha256 "4fc9ea078f651f0def1480fd8991da3ca39f37e4dc278a05dcad2350085953ef"
   end
   if OS.linux? && Hardware::CPU.intel?
-    url "https://datafy-cp-artifacts.s3-eu-west-1.amazonaws.com/cli/1.5.3/conveyor_linux_amd64.tar.gz"
+    url "https://static.conveyordata.com/cli/1.5.3/conveyor_linux_amd64.tar.gz"
     sha256 "09f11774361ff9d1c73e5695398b633603f95d44da64d4d5ca321c9d81158d31"
   end
   version "1.5.3"
