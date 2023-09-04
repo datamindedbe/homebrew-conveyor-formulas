@@ -2,18 +2,18 @@ class Conveyor < Formula
   desc "Conveyor command line interface"
   homepage "https://www.conveyordata.com/"
   if OS.mac? && Hardware::CPU.intel?
-    url "https://static.conveyordata.com/cli/1.11.10/conveyor_darwin_amd64.tar.gz"
-    sha256 "386628ced197a72d35ac3158eccdeefbb7dbba3069070cc775f43720a7e423f3"
+    url "https://static.conveyordata.com/cli/1.11.11/conveyor_darwin_amd64.tar.gz"
+    sha256 "f394fae0e62142cdcef09b46f7914807f72cdcb50073a44f2e73c50ba1df136c"
   end
   if OS.mac? && Hardware::CPU.arm?
-    url "https://static.conveyordata.com/cli/1.11.10/conveyor_darwin_arm64.tar.gz"
-    sha256 "a82d42c8bd5c7e5cd97a6059922b38db5e62dcc4cc89549fd7aab115988cebe3"
+    url "https://static.conveyordata.com/cli/1.11.11/conveyor_darwin_arm64.tar.gz"
+    sha256 "f001c1359af0b2b7b815076193ce3a8c530ab06f7a5ceb1c12a41f908b06bc36"
   end
   if OS.linux? && Hardware::CPU.intel?
-    url "https://static.conveyordata.com/cli/1.11.10/conveyor_linux_amd64.tar.gz"
-    sha256 "6437331e72ccc12f99b0535d8a727b6387c8df951ec0ec7dcdc416ba24e3d4ee"
+    url "https://static.conveyordata.com/cli/1.11.11/conveyor_linux_amd64.tar.gz"
+    sha256 "22f61a62eba23508266b3b162858a98c2518ea5c29ba63865aa3698da5e164d5"
   end
-  version "1.11.10"
+  version "1.11.11"
 
   def install
     bin.install Dir.glob("**/conveyor")
