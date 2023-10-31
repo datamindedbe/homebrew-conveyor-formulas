@@ -13,6 +13,10 @@ class Conveyor < Formula
     url "https://static.conveyordata.com/cli/<version>/conveyor_linux_amd64.tar.gz"
     sha256 "<linux_intel_sha256>"
   end
+  if OS.linux? && Hardware::CPU.arm?
+    url "https://static.conveyordata.com/cli/<version>/conveyor_linux_arm64.tar.gz"
+    sha256 "<linux_arm_sha256>"
+  end
   version "<version>"
 
   def install
