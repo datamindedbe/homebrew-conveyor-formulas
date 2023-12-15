@@ -24,22 +24,22 @@ class Conveyor < Formula
     cp bin/"conveyor", bin/"datafy"
 
     # Install bash completion
-    output = Utils.safe_popen_read("#{bin}/conveyor", "completion", "bash", { :err => :out })
+    output = Utils.safe_popen_read(bin/"conveyor", "completion", "bash")
     (bash_completion/"conveyor").write output
     (bash_completion/"datafy").write output
 
     # Install zsh completion
-    output = Utils.safe_popen_read("#{bin}/conveyor", "completion", "zsh", { :err => :out })
+    output = Utils.safe_popen_read(bin/"conveyor", "completion", "zsh")
     (zsh_completion/"_conveyor").write output
     (zsh_completion/"_datafy").write output
 
     # Install fish completion
-    output = Utils.safe_popen_read("#{bin}/conveyor", "completion", "fish", { :err => :out })
+    output = Utils.safe_popen_read(bin/"conveyor", "completion", "fish")
     (fish_completion/"conveyor.fish").write output
-    (zsh_completion/"datafy.fish").write output
+    (fish_completion/"datafy.fish").write output
   end
 
   test do
-    system "#{bin}/conveyor", "--help"
+    system bin/"conveyor", "--help"
   end
 end

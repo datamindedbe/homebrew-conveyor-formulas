@@ -1,0 +1,17 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 5
+    steps:
+      - name: install formula
+        run: |
+          brew install --build-from-source conveyor.rb
+        working-directory: Formula
